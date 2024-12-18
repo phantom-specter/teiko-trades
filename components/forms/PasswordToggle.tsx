@@ -1,18 +1,18 @@
-import { LinearEye, LinearEyeSlash } from "@/public/assets/icons";
+// import { LinearEye, LinearEyeSlash } from "@/public/assets/icons";
 
 interface Props {
   onClick: () => void;
   isVisible: boolean;
 }
 
-const PasswordToggle = ({ isVisible, onClick }: Props): JSX.Element => {
+const PasswordToggle = ({ onClick }: Props) => {
   return (
     <button
       className="flex items-center justify-center"
       onClick={onClick}
       type="button"
     >
-      {isVisible ? <LinearEye /> : <LinearEyeSlash />}
+      {/* {isVisible ? <LinearEye /> : <LinearEyeSlash />} */}
     </button>
   );
 };

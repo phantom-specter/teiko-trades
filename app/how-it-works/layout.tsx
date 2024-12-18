@@ -6,22 +6,22 @@ export default function HowItWorksLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="pb-60 pt-12">
+    <main className="pb-60 pt-40">
       <div className="app-container bg-appDarkBlue200 py-12">
         <article className="mx-auto w-full max-w-[69.875rem] font-baiJamjuree">
-          <h1 className="pb-9 text-center text-xl font-bold md:text-2xl lg:text-3xl">
+          <h1 className="pb-9 text-center text-lg font-bold md:text-xl lg:text-2xl">
             HOW IT WORKS
           </h1>
 
-          <h2 className="text-base md:text-lg lg:text-xl">
+          <h2 className="text-sm md:text-base lg:text-lg">
             Teiko Tokens discourage dumps by making sure that all created tokens
             backed by trading fee revenue locked in smart contracts on-chain.
             Each Teiko Token is
-            <span className="text-appGreen100 px-1">backed by trading fee</span>
+            <span className="px-1 text-appGreen100">backed by trading fee</span>
             revenue incentive's token holders to
-            <span className="text-appBlue200 px-1">HODL</span>
+            <span className="px-1 text-appBlue200">HODL</span>
             and not
-            <span className="text-appRed100 pl-1">DUMP</span>.
+            <span className="pl-1 text-appRed100">DUMP</span>.
           </h2>
           <Nav />
           {children}

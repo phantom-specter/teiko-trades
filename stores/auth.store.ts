@@ -36,5 +36,5 @@ export const authStore = createWithEqualityFn(
 );
 
 export const useAuthStore = () => {
-  return useStore(authStore);
+  return useStore(authStore, (state) => state);
 };

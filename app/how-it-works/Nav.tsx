@@ -25,13 +25,13 @@ const Nav = () => {
         <li className="flex items-center gap-6" key={key}>
           <Link
             href={route}
-            className={`bg-appBlue300 flex w-full max-w-[23rem] items-center justify-center rounded-3xl border-4 p-5 text-base font-bold transition-all duration-300 md:text-lg lg:text-xl ${pathName === route ? "border-appYellow300" : "border-transparent"}`}
+            className={`flex w-full max-w-[23rem] items-center justify-center rounded-3xl border-4 bg-appBlue300 p-5 text-sm font-bold transition-all duration-300 md:text-base lg:text-lg ${pathName === route ? "border-appYellow300" : "border-transparent"}`}
           >
             {title}
           </Link>
 
           {key === 0 && (
-            <span className="bg-appBlue400 border-appDarkBlue300 flex size-14 shrink-0 rotate-90 items-center justify-center rounded-full border text-3xl md:size-16 md:text-4xl lg:size-20 lg:text-5xl">
+            <span className="flex size-12 shrink-0 rotate-90 items-center justify-center rounded-full border border-appDarkBlue300 bg-appBlue400 text-2xl md:size-14 md:text-3xl lg:size-16 lg:text-4xl">
               <IconamoonSwap />
             </span>
           )}

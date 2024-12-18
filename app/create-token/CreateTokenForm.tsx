@@ -42,7 +42,7 @@ const schema = Joi.object<Schema>({
 const CreateTokenForm = () => {
   const [isShown, setIsShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { Login, isLoggedIn, loginResponse } = useAuthenticate();
+  const { loginResponse } = useAuthenticate();
 
   const {
     handleSubmit,

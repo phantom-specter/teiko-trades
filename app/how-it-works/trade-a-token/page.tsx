@@ -10,7 +10,7 @@ const TradeATokenPage = () => {
     <ul className="flex flex-col gap-y-6">
       {tradeToken?.map((value, key) => (
         <li
-          className="font-baiJamjuree text-base md:text-lg lg:text-xl"
+          className="font-baiJamjuree text-sm md:text-base lg:text-lg"
           key={key}
         >
           <span className="text-appYellow100">Step {key + 1}:</span> {value}
