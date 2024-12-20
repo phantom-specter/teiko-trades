@@ -23,7 +23,9 @@ export default function HowItWorksLayout({
         <ul className="mx-auto grid w-full max-w-[57.563rem] grid-cols-2 gap-x-9 gap-y-10 sm:grid-cols-3 md:gap-x-11 lg:gap-x-14">
           {[...Array(12)]?.map((_, key) => (
             <li className="h-full w-full" key={key}>
-              <TokenCard />
+              <Link href={routes.TOKEN_DETAILS_PAGE}>
+                <TokenCard />
+              </Link>
             </li>
           ))}
         </ul>

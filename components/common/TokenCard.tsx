@@ -11,11 +11,11 @@ const TokenCard = ({ className }: Props): JSX.Element => {
   return (
     <div
       className={cn(
-        "token-card-bg-gradient flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-appYellow300 font-bold sm:text-base",
+        "token-card-bg-gradient flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-appYellow300 font-baiJamjuree font-bold sm:text-base",
         className,
       )}
     >
-      <OrdinalIcon />
+      <OrdinalIcon className="text-xl" />
       <p>$TEKO</p>
     </div>
   );

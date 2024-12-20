@@ -12,7 +12,7 @@ const data = [
   },
   {
     title: "Trade a Token",
-    route: routes.TRADE_A_TOKEN_PAGE,
+    route: routes.HOW_TO_TRADE_A_TOKEN_PAGE,
   },
 ];
 

@@ -22,6 +22,7 @@ export default {
         appDarkBlue200: "#011428",
         appDarkBlue300: "#011229",
         appDarkBlue400: "#000A15",
+        appDarkBlue500: "#001937",
         appGray100: "#C5C5C5",
         appGray200: "#E6F1FF",
         appGray300: "#929292",
