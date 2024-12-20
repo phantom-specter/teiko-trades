@@ -1,8 +1,9 @@
-import { UserData } from "@/types";
-import { showConnect } from "@stacks/connect";
 import { useAuthStore } from "@/stores/auth.store";
+import { UserData } from "@/types";
+import appConfig from "@/utils/appConfig";
 import { appToast } from "@/utils/appToast";
 import { appUserSession } from "@/utils/appUserSession";
+import { showConnect } from "@stacks/connect";
 
 export function useAuthenticate() {
   const { setLoginResponse, logout, loginResponse } = useAuthStore();
@@ -14,8 +15,8 @@ export function useAuthenticate() {
 
     showConnect({
       appDetails: {
-        name: "Testing Ghost App",
-        icon: window.location.origin + "/my-app-logo.svg",
+        name: appConfig.APP_NAME,
+        icon: window.location.origin + "/logo/teikolabs.svg",
       },
       redirectTo: "/",
       onCancel: () => {
@@ -32,6 +33,7 @@ export function useAuthenticate() {
 
   function Logout() {
     if (!isLoggedIn) return appToast.Warning("User already logged out.");
+
     logout();
     appToast.Success("Wallet disconnected successfully");
   }

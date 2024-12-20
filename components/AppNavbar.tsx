@@ -36,6 +36,7 @@ const socials = [
 const AppNavbar = () => {
   const [isVisible, setVisibility] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;

@@ -1,5 +1,5 @@
+import TokenCard from "@/components/common/TokenCard";
 import { BiSearch } from "@/components/icons";
-import { OrdinalIcon } from "@/components/icons/custom";
 import routes from "@/navigation/routes";
 import Link from "next/link";
 
@@ -34,12 +34,8 @@ export default function HowItWorksLayout({
       <section className="mx-auto max-w-[72.188rem] rounded-xl bg-appLightBlue100 px-5 py-10 lg:px-0">
         <ul className="mx-auto grid w-full max-w-[57.563rem] grid-cols-2 gap-x-9 gap-y-10 sm:grid-cols-3 md:gap-x-11 lg:gap-x-14">
           {[...Array(12)]?.map((_, key) => (
-            <li
-              key={key}
-              className="token-card-bg-gradient flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-appYellow300 font-bold sm:text-base"
-            >
-              <OrdinalIcon />
-              <p>$TEKO</p>
+            <li className="h-full w-full" key={key}>
+              <TokenCard />
             </li>
           ))}
         </ul>

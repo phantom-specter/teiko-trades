@@ -35,3 +35,13 @@ export function isValidTokenName(name: string) {
 
   return { status: true, data: name };
 }
+
+export function generateRandomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export const convertSVGtoURL = (value: string) => {
+  const svg = new Blob([value], { type: "image/svg+xml" });
+  const url = URL.createObjectURL(svg);
+  return url;
+};

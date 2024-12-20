@@ -1,13 +1,16 @@
 "use client";
 
 import { MageImageUpload, ZondiconsCloseOutline } from "@/components/icons";
+import { useAppStateStore } from "@/stores/appState.store";
 import { useRouter } from "next/navigation";
+import ChangeAvatarModal from "./ChangeAvatarModal";
 
 const image =
   "https://c8.alamy.com/comp/TC2FPE/young-man-avatar-cartoon-character-profile-picture-TC2FPE.jpg";
 
 const ProfilePage = () => {
   const router = useRouter();
+  const { setActiveModal } = useAppStateStore();
 
   return (
     <main className="flex min-h-[100dvh] items-center justify-center bg-[url('/images/blurred-bg.png')] bg-cover bg-center bg-no-repeat px-5 lg:px-0">
@@ -37,6 +40,12 @@ const ProfilePage = () => {
             <figcaption className="flex flex-col gap-y-2">
               <p className="text-xl font-bold">GeekCoiner</p>
               <button
+                onClick={() =>
+                  setActiveModal({
+                    emptyModalComponent: <ChangeAvatarModal />,
+                    modalType: "EMPTY_MODAL",
+                  })
+                }
                 type="button"
                 className="flex items-center gap-2 rounded-lg border border-appGray200 px-4 py-3 font-bold transition-all duration-300 hover:border-appYellow100 hover:text-appYellow100"
               >

@@ -14,6 +14,7 @@ import { useAuthenticate } from "@/hooks/useAuthenticate";
 import { saveMetaData } from "@/utils/storage";
 import { isValidTokenName } from "@/utils";
 import { deployDex, deployToken } from "@/utils/deployToken";
+import { SpinnerIcon } from "@/components/icons/custom";
 
 interface Schema {
   name: string;
@@ -42,7 +43,7 @@ const schema = Joi.object<Schema>({
 const CreateTokenForm = () => {
   const [isShown, setIsShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { loginResponse } = useAuthenticate();
+  const { loginResponse, isLoggedIn, Login } = useAuthenticate();
 
   const {
     handleSubmit,
@@ -53,6 +54,8 @@ const CreateTokenForm = () => {
   });
 
   const onSubmit = handleSubmit(async (formValues) => {
+    if (!isLoggedIn) Login();
+
     const {
       name,
       ticker,
@@ -214,10 +217,29 @@ const CreateTokenForm = () => {
         </div>
       </AppCollapse>
 
-      <button className="mx-auto flex w-full max-w-[17.438rem] items-center justify-center gap-2 rounded-lg bg-appYellow200 py-4 font-bold transition-all duration-300 hover:scale-105 hover:bg-appYellow100 active:scale-95">
-        <span>Create coin</span>
-        <OuiMlCreatePopulationJob />
-      </button>
+      {isLoggedIn ? (
+        <button
+          disabled={isLoading}
+          type="submit"
+          className="mx-auto flex w-full max-w-[17.438rem] items-center justify-center gap-2 rounded-lg bg-appYellow200 py-4 font-bold transition-all duration-300 hover:scale-105 hover:bg-appYellow100 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <span>Create coin</span>
+          {isLoading ? (
+            <SpinnerIcon className="text-appWhite200" />
+          ) : (
+            <OuiMlCreatePopulationJob className="text-xl sm:text-2xl" />
+          )}
+        </button>
+      ) : (
+        <button
+          disabled={isLoading}
+          type="button"
+          onClick={Login}
+          className="mx-auto flex w-full max-w-[17.438rem] items-center justify-center gap-2 rounded-lg bg-appYellow200 py-4 font-bold transition-all duration-300 hover:scale-105 hover:bg-appYellow100 active:scale-95"
+        >
+          Connect Wallet
+        </button>
+      )}
     </form>
   );
 };

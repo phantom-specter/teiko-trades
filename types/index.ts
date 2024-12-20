@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export interface UserData {
   profile: {
     "@type": string;
@@ -64,4 +66,10 @@ export interface UserData {
   appPrivateKeyFromWalletSalt: string | null;
   coreNode: string | null;
   gaiaAssociationToken: string;
+}
+
+export interface AppModalProps {
+  modalType: "EMPTY_MODAL";
+  shouldBackgroundClose?: boolean;
+  emptyModalComponent?: JSX.Element;
 }

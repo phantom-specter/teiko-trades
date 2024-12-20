@@ -6,15 +6,13 @@ export interface AppInputProps
     InputHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement
   > {
-  isLoading?: boolean;
   hookFormProps: {};
   errorMessage: string | null;
   title: string;
 }
 
 const AppTextAreaInput = (props: AppInputProps) => {
-  const { errorMessage, hookFormProps, isLoading, type, title, ...otherProps } =
-    props;
+  const { errorMessage, hookFormProps, title, ...otherProps } = props;
 
   return (
     <div className="w-full">
