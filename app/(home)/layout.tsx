@@ -1,7 +1,8 @@
-import TokenCard from "@/components/common/TokenCard";
-import { BiSearch } from "@/components/icons";
-import routes from "@/navigation/routes";
 import Link from "next/link";
+
+import TokenCard from "@/components/common/TokenCard";
+import routes from "@/navigation/routes";
+import TokenSearch from "./components/TokenSearch";
 
 export default function HowItWorksLayout({
   children,
@@ -17,20 +18,7 @@ export default function HowItWorksLayout({
         CREATE TOKEN
       </Link>
 
-      <form className="mx-auto mb-16 mt-7 flex w-full max-w-[43.106rem] items-center rounded-lg bg-appLightBlue100 p-1">
-        <input
-          type="search"
-          placeholder="Search for a token"
-          className="block h-10 w-full bg-transparent px-3 outline-none placeholder:text-appGray100"
-        />
-        <button
-          type="submit"
-          className="aspect-square rounded-lg bg-appLightBlue200 px-4 text-base md:text-lg lg:text-xl"
-        >
-          <BiSearch />
-        </button>
-      </form>
-
+      <TokenSearch />
       <section className="mx-auto max-w-[72.188rem] rounded-xl bg-appLightBlue100 px-5 py-10 lg:px-0">
         <ul className="mx-auto grid w-full max-w-[57.563rem] grid-cols-2 gap-x-9 gap-y-10 sm:grid-cols-3 md:gap-x-11 lg:gap-x-14">
           {[...Array(12)]?.map((_, key) => (
