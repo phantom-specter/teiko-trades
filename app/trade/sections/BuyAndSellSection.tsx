@@ -31,7 +31,7 @@ const BuyAndSellSection = (): JSX.Element => {
 
       <AppTabs
         activeIndex={activeIndex}
-        components={[<BuySection />, <SellSection />]}
+        components={[<BuySection key={1} />, <SellSection key={2} />]}
       />
     </>
   );
