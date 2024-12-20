@@ -9,10 +9,11 @@ import {
 import { SpinnerIcon } from "@/components/icons/custom";
 import { useAppStateStore } from "@/stores/appState.store";
 import { convertSVGtoURL, generateRandomNumber } from "@/utils";
+import Image from "next/image";
 
 const isLoading = false;
 
-let avatars: string[] = [];
+const avatars: string[] = [];
 
 for (let i = 0; i < 100; i++) {
   const avatar = createAvatar(micah, {
@@ -92,8 +93,10 @@ const ChangeAvatarModal = (): JSX.Element => {
             className={`cursor-pointer rounded-full transition-all duration-300 ${selectedImage === index ? "bg-yellow-200" : "hover:bg-appBlue800 bg-transparent"}`}
             key={index}
           >
-            <img
+            <Image
               className="w-full max-w-[10rem]"
+              width={100}
+              height={100}
               src={convertSVGtoURL(value)}
               alt="avatar"
             />

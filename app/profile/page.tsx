@@ -4,6 +4,7 @@ import { MageImageUpload, ZondiconsCloseOutline } from "@/components/icons";
 import { useAppStateStore } from "@/stores/appState.store";
 import { useRouter } from "next/navigation";
 import ChangeAvatarModal from "./ChangeAvatarModal";
+import Image from "next/image";
 
 const image =
   "https://c8.alamy.com/comp/TC2FPE/young-man-avatar-cartoon-character-profile-picture-TC2FPE.jpg";
@@ -31,7 +32,9 @@ const ProfilePage = () => {
 
         <div className="mx-auto w-full max-w-[28rem]">
           <figure className="mb-8 flex justify-center gap-4">
-            <img
+            <Image
+              width={100}
+              height={100}
               src={image}
               alt="profile"
               className="size-28 rounded-[14px] object-cover md:size-32 lg:size-36"
