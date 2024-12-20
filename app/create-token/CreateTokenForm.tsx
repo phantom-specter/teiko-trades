@@ -100,6 +100,7 @@ const CreateTokenForm = () => {
           userWalletAddress: loginResponse?.profile?.stxAddress?.testnet,
         },
         (error) => {
+          setIsLoading(false);
           appToast.Error(JSON.stringify(error, undefined, 3));
         },
         (txid) => {
@@ -116,6 +117,7 @@ const CreateTokenForm = () => {
           userWallet: loginResponse?.profile?.stxAddress?.testnet,
         },
         (error) => {
+          setIsLoading(false);
           appToast.Error(JSON.stringify(error, undefined, 3));
         },
         (txid) => {

@@ -31,10 +31,10 @@ export const deployToken = async (
     contractName: prop?.name?.trim()?.replace(/ /g, "-")?.replace(/_/g, "-"),
     codeBody: formatToken(prop),
     network,
-    // appDetails: {
-    //   name: "My App",
-    //   icon: window.location.origin + "/my-app-logo.svg",
-    // },
+    appDetails: {
+      name: "My App",
+      icon: window.location.origin + "/my-app-logo.svg",
+    },
 
     anchorMode: AnchorMode.Any,
     onFinish: (data) => {

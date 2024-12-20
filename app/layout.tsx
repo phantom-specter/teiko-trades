@@ -5,6 +5,7 @@ import "./globals.css";
 import AppNavbar from "@/components/AppNavbar";
 import AppModals from "@/components/modals/AppModals";
 import appConfig from "@/utils/appConfig";
+import { Toaster } from "sonner";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         <AppNavbar />
         {children}
+        <Toaster richColors position="top-right" theme="light" />
         <AppModals />
       </body>
     </html>

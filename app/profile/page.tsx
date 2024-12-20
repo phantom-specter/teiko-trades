@@ -1,17 +1,42 @@
 "use client";
 
+import { joiResolver } from "@hookform/resolvers/joi";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+import AppInput from "@/components/forms/AppInput";
 import { MageImageUpload, ZondiconsCloseOutline } from "@/components/icons";
 import { useAppStateStore } from "@/stores/appState.store";
-import { useRouter } from "next/navigation";
 import ChangeAvatarModal from "./ChangeAvatarModal";
-import Image from "next/image";
+import Joi from "joi";
 
 const image =
   "https://c8.alamy.com/comp/TC2FPE/young-man-avatar-cartoon-character-profile-picture-TC2FPE.jpg";
 
+interface Schema {
+  username: string;
+}
+
+const schema = Joi.object<Schema>({
+  username: Joi.string().min(3).max(250).required(),
+});
+
 const ProfilePage = () => {
   const router = useRouter();
   const { setActiveModal } = useAppStateStore();
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Schema>({
+    resolver: joiResolver(schema),
+  });
+
+  const onSubmit = handleSubmit(async (formValues) => {
+    console.log(formValues);
+  });
 
   return (
     <main className="flex min-h-[100dvh] items-center justify-center bg-[url('/images/blurred-bg.png')] bg-cover bg-center bg-no-repeat px-5 lg:px-0">
@@ -58,10 +83,37 @@ const ProfilePage = () => {
             </figcaption>
           </figure>
 
-          <p className="gap-2 py-11 text-center text-lg font-semibold">
+          <p className="gap-2 py-8 text-center text-lg font-semibold">
             <span>User Info</span>
             <span className="block h-1 w-full rounded-full bg-appYellow300" />
           </p>
+          <form onSubmit={onSubmit}>
+            <AppInput
+              errorMessage={errors?.username?.message ?? ""}
+              title="Username"
+              placeholder="Enter name"
+              hookFormProps={register("username")}
+            />
+            <p className="mb-6 mt-2 text-appYellow300">
+              You can change your username once every day
+            </p>
+
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                className="border-appWhite300 w-full rounded-lg border py-2 font-bold transition-all duration-300 hover:scale-105 hover:border-appRed100 hover:bg-appRed100 active:scale-95 sm:text-base"
+              >
+                Close
+              </button>
+
+              <button
+                className="w-full rounded-lg border border-appGreen200 bg-appGreen200 py-2 font-bold transition-all duration-300 hover:scale-105 active:scale-95 sm:text-base"
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       </section>
     </main>
