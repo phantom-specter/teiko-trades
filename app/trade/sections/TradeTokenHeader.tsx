@@ -56,6 +56,7 @@ const TradeTokenHeader = ({ dexWalletId }: Props): JSX.Element => {
 
   const [_, coinName] = dexWalletId?.split(".");
 
+  console.log(_);
   const finalCoinName = removeDexSuffix(coinName);
   return (
     <header className="flex flex-wrap items-center gap-5 rounded-lg bg-appDarkBlue400 px-4 py-6">
