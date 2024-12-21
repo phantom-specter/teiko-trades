@@ -4,17 +4,17 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useForm } from "react-hook-form";
 
+import AppCollapse from "@/components/AppCollapse";
 import AppInput from "@/components/forms/AppInput";
 import AppTextAreaInput from "@/components/forms/AppTextAreaInput";
 import { OouiCollapse, OuiMlCreatePopulationJob } from "@/components/icons";
-import { useState } from "react";
-import AppCollapse from "@/components/AppCollapse";
-import { appToast } from "@/utils/appToast";
-import { useAuthenticate } from "@/hooks/useAuthenticate";
-import { saveMetaData } from "@/utils/storage";
-import { isValidTokenName } from "@/utils";
-import { deployDex, deployToken } from "@/utils/deployToken";
 import { SpinnerIcon } from "@/components/icons/custom";
+import { useAuthenticate } from "@/hooks/useAuthenticate";
+import { isValidTokenName } from "@/utils";
+import { appToast } from "@/utils/appToast";
+import { deployDex, deployToken } from "@/utils/deployToken";
+import { saveMetaData } from "@/utils/storage";
+import { useState } from "react";
 
 interface Schema {
   name: string;
@@ -56,6 +56,7 @@ const CreateTokenForm = () => {
   const onSubmit = handleSubmit(async (formValues) => {
     if (!isLoggedIn) Login();
 
+    console.log("2");
     const {
       name,
       ticker,
@@ -74,6 +75,7 @@ const CreateTokenForm = () => {
 
     if (!checkTokenName?.status) return appToast?.Warning(checkTokenName?.data);
 
+    console.log("3");
     setIsLoading(true);
     // const imageUploadRes = await uploadImageToFirebase(image);
     // if (imageUploadRes?.status) {

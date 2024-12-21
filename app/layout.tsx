@@ -6,6 +6,7 @@ import AppNavbar from "@/components/AppNavbar";
 import AppModals from "@/components/modals/AppModals";
 import appConfig from "@/utils/appConfig";
 import { Toaster } from "sonner";
+import ReactQueryClient from "@/components/ReactQueryClient";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -34,10 +35,12 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${baiJamjuree?.variable} antialiased`}
       >
-        <AppNavbar />
-        {children}
-        <Toaster richColors position="top-right" theme="light" />
-        <AppModals />
+        <ReactQueryClient>
+          <AppNavbar />
+          {children}
+          <Toaster richColors position="top-right" theme="light" />
+          <AppModals />
+        </ReactQueryClient>
       </body>
     </html>
   );

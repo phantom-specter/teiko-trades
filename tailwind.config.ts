@@ -34,6 +34,7 @@ export default {
         appRed100: "#D34E4E",
         appRed200: "#FFEAE9",
         appRed300: "#D32F2F",
+        appRed400: "#FF3B30",
         appWhite200: "#FEFEFE",
         appWhite300: "#E6E8EA",
         appYellow100: "#FAA02E",

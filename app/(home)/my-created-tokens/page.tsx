@@ -4,7 +4,7 @@ import { JSX } from "react";
 import TokenCard from "@/components/common/TokenCard";
 import routes from "@/navigation/routes";
 
-const HomePage = (): JSX.Element => {
+const MyCreatedTokensPage = (): JSX.Element => {
   return (
     <ul className="mx-auto grid w-full max-w-[57.563rem] grid-cols-2 gap-x-9 gap-y-10 sm:grid-cols-3 md:gap-x-11 lg:gap-x-14">
       {[...Array(12)]?.map((_, key) => (
@@ -22,4 +22,4 @@ const HomePage = (): JSX.Element => {
   );
 };
 
-export default HomePage;
+export default MyCreatedTokensPage;
