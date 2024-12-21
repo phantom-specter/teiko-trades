@@ -1,16 +1,73 @@
+"use client";
+
 import { JSX } from "react";
 
+import { getAllUserBalances } from "@/api/stacks.api";
 import TokenCard from "@/components/common/TokenCard";
 import { UilCopy } from "@/components/icons";
+import { useAuthStore } from "@/stores/auth.store";
+import { FungibleToken } from "@/types/api/stacks.types";
+import { handleApiErrors } from "@/utils/handleErrors";
+import { useQuery } from "@tanstack/react-query";
 
-const TradeTokenHeader = (): JSX.Element => {
+interface Props {
+  dexWalletId: string;
+}
+
+function removeDexSuffix(input: string) {
+  if (!input) return "";
+
+  if (input.endsWith("-dex")) {
+    return input?.slice(0, -4);
+  }
+  return input;
+}
+
+function findValueBySuffix(tokens: FungibleToken, suffix: string): string {
+  for (const key in tokens) {
+    if (key?.endsWith(suffix)) {
+      const balance = tokens[key]?.balance;
+      if (isNaN(Number(balance))) return balance;
+      return Number(balance)?.toLocaleString(); // Return the value if the key ends with the given suffix
+    }
+  }
+  return "0"; // Return null if no match is found
+}
+
+const TradeTokenHeader = ({ dexWalletId }: Props): JSX.Element => {
+  console.log(dexWalletId);
+  const { loginResponse } = useAuthStore();
+
+  const userAddress = loginResponse?.profile?.stxAddress?.testnet;
+
+  const { data } = useQuery({
+    queryKey: ["getAllUserBalances", userAddress],
+    queryFn: async () => {
+      const response = await getAllUserBalances(userAddress ?? "");
+      if (response.ok && response?.data) {
+        return response?.data;
+      } else {
+        handleApiErrors(response);
+        return null;
+      }
+    },
+    enabled: !!userAddress,
+  });
+
+  const [_, coinName] = dexWalletId?.split(".");
+
+  const finalCoinName = removeDexSuffix(coinName);
   return (
     <header className="flex flex-wrap items-center gap-5 rounded-lg bg-appDarkBlue400 px-4 py-6">
       <div className="flex items-center gap-2">
         <TokenCard className="h-20 w-28" />
         <dl>
           <dt className="text-xs text-appGray300">Your Token Balance:</dt>
-          <dd className="font-bold sm:text-base">15,000,000</dd>
+          <dd className="font-bold sm:text-base">
+            {!!data?.fungible_tokens
+              ? `${findValueBySuffix(data?.fungible_tokens, finalCoinName) ?? "0"}`
+              : "0"}
+          </dd>
         </dl>
       </div>
       <div className="max-w-[33rem]">
