@@ -1,6 +1,7 @@
 import { baseApi } from "./base.api";
 
 import {
+  GetAllUserBalances,
   GetContractDetails,
   GetTransactionDetails,
   GetWalletTransactions,
@@ -43,3 +44,6 @@ export const getTokenMetaData = (props: GetUserBalance) => {
     },
   );
 };
+
+export const getAllUserBalances = (address: string) =>
+  baseApi.get<GetAllUserBalances>(`/v1/address/${address}/balances`);
