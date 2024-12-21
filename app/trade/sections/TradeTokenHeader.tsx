@@ -23,15 +23,15 @@ function removeDexSuffix(input: string) {
   return input;
 }
 
-function findValueBySuffix(tokens: FungibleToken, suffix: string): string {
+function findValueBySuffix(tokens: FungibleToken, suffix: string): number {
   for (const key in tokens) {
     if (key?.endsWith(suffix)) {
       const balance = tokens[key]?.balance;
-      if (isNaN(Number(balance))) return balance;
-      return Number(balance)?.toLocaleString(); // Return the value if the key ends with the given suffix
+      if (isNaN(Number(balance))) return 0;
+      return Number(balance); // Return the value if the key ends with the given suffix
     }
   }
-  return "0"; // Return null if no match is found
+  return 0; // Return null if no match is found
 }
 
 const TradeTokenHeader = ({ dexWalletId }: Props): JSX.Element => {
@@ -66,7 +66,16 @@ const TradeTokenHeader = ({ dexWalletId }: Props): JSX.Element => {
           <dt className="text-xs text-appGray300">Your Token Balance:</dt>
           <dd className="font-bold sm:text-base">
             {!!data?.fungible_tokens
-              ? `${findValueBySuffix(data?.fungible_tokens, finalCoinName) ?? "0"}`
+              ? `${
+                  findValueBySuffix(data?.fungible_tokens, finalCoinName)
+                    ? (
+                        findValueBySuffix(
+                          data?.fungible_tokens,
+                          finalCoinName,
+                        ) / 100_000_000
+                      )?.toLocaleString()
+                    : "0"
+                }`
               : "0"}
           </dd>
         </dl>
