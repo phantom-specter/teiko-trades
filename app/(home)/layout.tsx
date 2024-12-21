@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import TokenCard from "@/components/common/TokenCard";
 import routes from "@/navigation/routes";
+import HomeNav from "./components/HomeNav";
 import TokenSearch from "./components/TokenSearch";
 
-export default function HowItWorksLayout({
+export default function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -20,17 +20,9 @@ export default function HowItWorksLayout({
 
       <TokenSearch />
       <section className="mx-auto max-w-[72.188rem] rounded-xl bg-appLightBlue100 px-5 py-10 lg:px-0">
-        <ul className="mx-auto grid w-full max-w-[57.563rem] grid-cols-2 gap-x-9 gap-y-10 sm:grid-cols-3 md:gap-x-11 lg:gap-x-14">
-          {[...Array(12)]?.map((_, key) => (
-            <li className="h-full w-full" key={key}>
-              <Link href={routes.TOKEN_DETAILS_PAGE}>
-                <TokenCard />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <HomeNav />
+        {children}
       </section>
-      {children}
     </main>
   );
 }

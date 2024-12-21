@@ -29,7 +29,7 @@ export function isValidTokenName(name: string) {
   }
 
   // Check 3: It must be at least 2 characters long
-  if (name.length < 2) {
+  if (name?.length < 2) {
     return { status: false, data: "name must be at least 2 characters long" };
   }
 
@@ -45,3 +45,24 @@ export const convertSVGtoURL = (value: string) => {
   const url = URL.createObjectURL(svg);
   return url;
 };
+
+export function hexToAscii(hex: string) {
+  hex = hex.replace(/^0x/i, "");
+
+  let str = "";
+  for (let i = 0; i < hex?.length; i += 2) {
+    const hexChar = hex?.substr(i, 2);
+    str += String.fromCharCode(parseInt(hexChar, 16));
+  }
+  return str;
+}
+
+export function formatUAmount(str: string) {
+  if (!str) return "";
+  if (str.startsWith("u")) {
+    const value = str.substring(1);
+    if (isNaN(Number(value))) return value;
+    return Number(value)?.toLocaleString();
+  }
+  return str;
+}

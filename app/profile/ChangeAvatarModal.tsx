@@ -21,7 +21,7 @@ for (let i = 0; i < 100; i++) {
     seed: generateRandomNumber(10, 20_000_000_000).toString(),
   });
   const svg = avatar.toString();
-  if (svg.length < 9550) avatars.push(svg);
+  if (svg?.length < 9550) avatars.push(svg);
 }
 
 const ChangeAvatarModal = (): JSX.Element => {
