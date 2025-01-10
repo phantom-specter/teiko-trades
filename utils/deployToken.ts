@@ -7,6 +7,7 @@ import { AnchorMode, ContractDeployOptions } from "@stacks/transactions";
 import { getNetworkConfig } from "./appUserSession";
 import { formatToken } from "./contracts/formatToken";
 import { formatDexV2 } from "./contracts/dex-v2";
+import getPriceFormular from "./contracts/getPriceFormular";
 
 export const { ft_sip_trait_address, network } = getNetworkConfig();
 export const maxSupply = 2100000000000000;
@@ -19,6 +20,9 @@ interface TokenProps {
   userWalletAddress: string;
 }
 
+export const getTokenVariableName = (name: string) =>
+  name?.trim()?.replace(/ /g, "-")?.replace(/_/g, "-");
+
 export const deployToken = async (
   prop: TokenProps,
   onError: (error: unknown) => void,
@@ -28,7 +32,7 @@ export const deployToken = async (
     | ContractDeployOptions
     | ContractDeployRegularOptions
     | ContractDeploySponsoredOptions = {
-    contractName: prop?.name?.trim()?.replace(/ /g, "-")?.replace(/_/g, "-"),
+    contractName: getTokenVariableName(prop?.name),
     codeBody: formatToken(prop),
     network,
     appDetails: {
@@ -48,18 +52,23 @@ export const deployToken = async (
   }
 };
 
-export const getTokenVariableName = (name: string) =>
-  name?.trim()?.replace(/ /g, "-");
-
 export interface GenerateTokenDexAddressProps {
   userWalletAddress: string;
   name: string;
 }
+
 export const generateTokenDexAddress = (
   props: GenerateTokenDexAddressProps,
 ) => {
   const { userWalletAddress, name } = props;
   return `'${userWalletAddress}.${getTokenVariableName(name)}-dex`;
+};
+
+export const generateTokenNameWithAddress = (
+  props: GenerateTokenDexAddressProps,
+) => {
+  const { userWalletAddress, name } = props;
+  return `'${userWalletAddress}.${getTokenVariableName(name)}`;
 };
 
 export const deployDex = async (
@@ -68,13 +77,17 @@ export const deployDex = async (
   onSuccess: (txid: string) => void,
 ) => {
   const { userWallet, name } = prop;
+  console.log({ userWallet });
 
   const codeBody = formatDexV2({
-    allowedToken: generateTokenDexAddress({
+    allowedToken: generateTokenNameWithAddress({
       name,
       userWalletAddress: userWallet,
     }),
+    priceFormula: getPriceFormular.linearFormula2,
   });
+
+  console.log("dex--", codeBody);
 
   const txOptions:
     | ContractDeployOptions
