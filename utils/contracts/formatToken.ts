@@ -16,7 +16,7 @@ export function formatToken(props: TokenProps) {
 
   const tokenVariableName = getTokenVariableName(name);
 
-  return `(impl-trait '${ft_sip_trait_address}.sip-010-trait-ft-standard.sip-010-trait)
+  const code = `(impl-trait '${ft_sip_trait_address}.sip-010-trait-ft-standard.sip-010-trait)
   
   (define-constant contract-owner tx-sender)
   (define-constant err-owner-only (err u100))
@@ -81,4 +81,6 @@ export function formatToken(props: TokenProps) {
     userWalletAddress,
   })}))
    `;
+
+  return code;
 }

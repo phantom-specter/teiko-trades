@@ -1,12 +1,9 @@
-import getPriceFormular from "./getPriceFormular";
-
 interface Props {
   allowedToken: string;
   priceFormula?: string;
 }
 export function formatDexV2(props: Props) {
-  const { allowedToken, priceFormula = getPriceFormular.linearFormula1 } =
-    props;
+  const { allowedToken, priceFormula } = props;
 
   return `;; constants
 (define-constant ERR-UNAUTHORIZED (err u401))
@@ -19,7 +16,7 @@ export function formatDexV2(props: Props) {
 (define-constant GET-PRICE-INFO-ERROR (err u2003))
 (define-constant ERR-SELL-AMOUNT (err u2004))
 (define-constant DEX-ADDRESS (as-contract tx-sender)) ;; one contract per token
-(define-constant SWAP_FEE_WALLET '${allowedToken})
+(define-constant SWAP_FEE_WALLET ${allowedToken})
 (define-constant MAXSUPPLY u2100000000000000)
 
 ;; data vars
@@ -44,7 +41,7 @@ export function formatDexV2(props: Props) {
       ;; user send stx to dex
       (try! (stx-transfer? stx-after-fee tx-sender (as-contract tx-sender)))
       ;; dex send token to user
-      (try! (as-contract (contract-call? '${allowedToken} transfer tokens-out tx-sender recipient none)))
+      (try! (as-contract (contract-call? ${allowedToken} transfer tokens-out tx-sender recipient none)))
       (var-set stx-balance new-stx-balance )
       (var-set token-balance new-token-balance)
       (begin 
@@ -71,13 +68,13 @@ export function formatDexV2(props: Props) {
       (asserts! (>=  stx-receive u0) ERR-SELL-AMOUNT)
       (asserts! (is-eq contract-caller recipient) ERR-UNAUTHORIZED)
       ;; user send token to dex
-      ;; (try! (contract-call? '${allowedToken} transfer tokens-in tx-sender DEX-ADDRESS none))
+      (try! (contract-call? ${allowedToken} transfer tokens-in tx-sender DEX-ADDRESS none))
       ;; dex transfer stx to user and stxcity
-      ;; (try! (as-contract (stx-transfer? stx-receive tx-sender recipient)))
-      ;; (try! (as-contract (stx-transfer? stx-fee tx-sender SWAP_FEE_WALLET)))
+      (try! (as-contract (stx-transfer? stx-receive tx-sender recipient)))
+      (try! (as-contract (stx-transfer? stx-fee tx-sender SWAP_FEE_WALLET)))
       ;; update global variable
-      ;; (var-set stx-balance (- (var-get stx-balance) stx-out))
-      ;; (var-set token-balance new-token-balance)
+      (var-set stx-balance (- (var-get stx-balance) stx-out))
+      (var-set token-balance new-token-balance)
       (print {stx-receive: stx-receive, stx-fee: stx-fee, current-stx-balance: (var-get stx-balance), token-balance: (var-get token-balance)})
       (ok stx-receive)
     )
